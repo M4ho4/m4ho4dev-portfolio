@@ -32,16 +32,16 @@ app.use('/api/auth', require('./routes/auth').router);
 app.use('/api/projects', require('./routes/projects'));
 app.use('/api/contact', require('./routes/contact'));
 
-// Serve React app
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+// API status endpoint
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'M4ho4Dev Portfolio API is running!',
+    status: 'success',
+    timestamp: new Date().toISOString()
   });
-}
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-  console.log(`Admin panel: http://localhost:${PORT}/admin`);
-  console.log(`Frontend: http://localhost:3000`);
+  console.log(`API: http://localhost:${PORT}`);
 }); 
