@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, Filter, Code } from 'lucide-react';
+import { ExternalLink, Github, Filter, Code, Star, Eye } from 'lucide-react';
 import axios from 'axios';
 
 const Portfolio = () => {

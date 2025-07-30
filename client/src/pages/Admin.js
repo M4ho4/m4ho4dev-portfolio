@@ -8,7 +8,15 @@ import {
   MessageSquare,
   DollarSign,
   Users,
-  Upload
+  Upload,
+  X,
+  Save,
+  Image as ImageIcon,
+  LogIn,
+  LogOut,
+  Settings,
+  FolderOpen,
+  Mail
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import axios from 'axios';
@@ -21,6 +29,14 @@ const Admin = () => {
   const [showProjectModal, setShowProjectModal] = useState(false);
   const [editingProject, setEditingProject] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const [activeTab, setActiveTab] = useState('dashboard');
+  const [stats, setStats] = useState({
+    totalProjects: 0,
+    totalContacts: 0,
+    unreadMessages: 0
+  });
 
   // API base URL
   const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
@@ -34,6 +50,11 @@ const Admin = () => {
     demo_url: '',
     github_url: '',
     image: null
+  });
+
+  const [loginForm, setLoginForm] = useState({
+    username: '',
+    password: ''
   });
 
   useEffect(() => {
@@ -72,7 +93,7 @@ const Admin = () => {
     setLoading(true);
     setError('');
 
-    const result = await login(formData.username, formData.password);
+    const result = await login(loginForm.username, loginForm.password);
     if (!result.success) {
       setError(result.message);
     }
