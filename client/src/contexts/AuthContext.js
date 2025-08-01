@@ -16,20 +16,24 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   // API base URL - production'da environment variable kullan
-  const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+  const API_BASE_URL = 'http://localhost:3001';
 
   const login = async (username, password) => {
     try {
+      console.log('Login attempt:', { username, API_BASE_URL });
       const response = await axios.post(`${API_BASE_URL}/api/auth/login`, {
         username,
         password
       });
       
+      console.log('Login response:', response.data);
       const { token } = response.data;
       localStorage.setItem('token', token);
       setUser({ username });
       return { success: true };
     } catch (error) {
+      console.error('Login error:', error);
+      console.error('Error response:', error.response);
       return { 
         success: false, 
         message: error.response?.data?.message || 'Login failed' 
