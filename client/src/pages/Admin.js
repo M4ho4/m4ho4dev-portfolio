@@ -39,7 +39,7 @@ const Admin = () => {
   });
 
   // API base URL
-  const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+  const API_BASE_URL = 'https://m4ho4dev-portfolio-1.onrender.com';
 
   const [formData, setFormData] = useState({
     title: '',

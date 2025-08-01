@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   // API base URL - production'da environment variable kullan
-  const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+  const API_BASE_URL = 'https://m4ho4dev-portfolio-1.onrender.com';
 
   const login = async (username, password) => {
     try {
