@@ -6,7 +6,10 @@ const { initDatabase } = require('./database');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3001;
+
+// Trust proxy for rate limiting
+app.set('trust proxy', 1);
 
 // Initialize database
 initDatabase().then(() => {
@@ -19,13 +22,6 @@ initDatabase().then(() => {
 app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
-
-// Rate limiting
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100 // limit each IP to 100 requests per windowMs
-});
-app.use(limiter);
 
 // Routes
 app.use('/api/auth', require('./routes/auth').router);
