@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const rateLimit = require('express-rate-limit');
 const { initDatabase } = require('./database');
 require('dotenv').config();
 
